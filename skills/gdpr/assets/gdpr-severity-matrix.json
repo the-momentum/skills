@@ -1,0 +1,191 @@
+{
+  "version": "0.5.0",
+  "overall_score": {
+    "GREEN": {
+      "label": "GREEN",
+      "conditions": "No CRITICAL, no HIGH, 3 or fewer MEDIUM findings",
+      "numeric_range": [66, 100],
+      "action": "Document compliance posture; schedule annual review"
+    },
+    "YELLOW": {
+      "label": "YELLOW",
+      "conditions": "1-2 HIGH findings, OR 4 or more MEDIUM findings (no CRITICAL)",
+      "numeric_range": [31, 65],
+      "action": "Address HIGH findings; review with DPO"
+    },
+    "RED": {
+      "label": "RED",
+      "conditions": "1 or more CRITICAL findings, OR 3 or more HIGH findings",
+      "numeric_range": [0, 30],
+      "action": "Stop processing PII until CRITICAL issues resolved; immediate DPO/lawyer consultation"
+    }
+  },
+  "severity_levels": {
+    "CRITICAL": {
+      "color": "red",
+      "emoji": "🔴",
+      "description": "Immediate violation risk — requires priority action",
+      "examples": [
+        "Passwords stored in plain text",
+        "PII (PESEL, SSN, credit card) logged to console or log files",
+        "Personal data transmitted over unencrypted connection (HTTP, sslmode=disable)",
+        "Hardcoded database credentials in source code",
+        "IBAN or credit card numbers in application code",
+        "No deletion mechanism (Art. 17 violation)",
+        "Criminal data (Art. 10) without documented authorization",
+        "Special category data (Art. 9) without documented legal basis",
+        "SSL/TLS certificate validation disabled",
+        "Analytics SDKs initialized without consent check",
+        "Logging locale-specific IDs (PESEL, Personalausweis, NIE, INSEE, Codice Fiscale)"
+      ]
+    },
+    "HIGH": {
+      "color": "orange",
+      "emoji": "🟠",
+      "description": "Serious compliance gap — requires action",
+      "examples": [
+        "No consent management library or consent mechanism detected",
+        "No privacy policy found in codebase",
+        "No data deletion endpoint (Art. 17)",
+        "Pre-ticked consent checkboxes",
+        "Bundled consent for multiple purposes",
+        "CORS wildcard with credentials",
+        "CSRF protection disabled",
+        "Retention set to unlimited/forever",
+        "PII in email subject lines",
+        "Tracking cookies set without consent (ePrivacy violation)",
+        "Automated decision-making without human review option",
+        "Art. 8 children data without age verification",
+        "Art. 22 credit scoring without explainability"
+      ]
+    },
+    "MEDIUM": {
+      "color": "yellow",
+      "emoji": "🟡",
+      "description": "Requires attention — should be addressed",
+      "examples": [
+        "Request body logged (may contain PII depending on endpoint)",
+        "Soft-delete without confirmed hard-delete mechanism",
+        "IP addresses in code without purpose documentation",
+        "PII variable names without data minimization documentation",
+        "Tracking pixel without consent verification (ePrivacy consideration)",
+        "PII in push notifications",
+        "No data export endpoint (Art. 20)"
+      ]
+    },
+    "LOW": {
+      "color": "green",
+      "emoji": "🟢",
+      "description": "Minor improvement opportunity",
+      "examples": [
+        "Missing processing purpose comments in code",
+        "No privacy-by-design review in new modules",
+        "Consent patterns found in i18n/locale files only",
+        "Test file matches downgraded from higher severity"
+      ]
+    },
+    "INFO": {
+      "color": "blue",
+      "emoji": "ℹ️",
+      "description": "Informational — positive signals",
+      "examples": [
+        "Consent management library detected",
+        "Data deletion endpoint found",
+        "Privacy policy reference found",
+        "Data portability endpoint found"
+      ]
+    }
+  },
+  "escalation_triggers": {
+    "art8_children": {
+      "article": "Art. 8",
+      "title": "Children's Data",
+      "description": "Processing data of minors requires specific consent mechanisms and age verification. Member states set age between 13-16.",
+      "always_escalate": true
+    },
+    "art9_special_categories": {
+      "article": "Art. 9",
+      "title": "Special Category Data",
+      "description": "Health, biometric, genetic, racial/ethnic, political, religious, trade union, sexual orientation, philosophical beliefs, sex life data. Requires explicit consent or other Art. 9(2) exception.",
+      "always_escalate": true
+    },
+    "art10_criminal": {
+      "article": "Art. 10",
+      "title": "Criminal Data",
+      "description": "Processing criminal convictions/offences requires official authority or specific national law. Stricter than Art. 9.",
+      "always_escalate": true
+    },
+    "art22_automated": {
+      "article": "Art. 22",
+      "title": "Automated Decision-Making",
+      "description": "Automated decisions with significant effects on individuals require transparency, human review option, and right to contest.",
+      "always_escalate": true
+    },
+    "art26_joint_controllers": {
+      "article": "Art. 26",
+      "title": "Joint Controllers",
+      "description": "Joint processing arrangements require transparent liability allocation, documented agreements, and clear data subject communication.",
+      "always_escalate": true
+    },
+    "art27_eu_representatives": {
+      "article": "Art. 27",
+      "title": "Representatives in EU",
+      "description": "Non-EU data controllers must appoint an EU representative; required if subjects in EU, GDPR applies, but controller not established in EU.",
+      "always_escalate": true
+    },
+    "art35_dpia": {
+      "article": "Art. 35",
+      "title": "DPIA Required",
+      "description": "High-risk processing requires a Data Protection Impact Assessment before commencing.",
+      "always_escalate": true
+    },
+    "art37_dpo_required": {
+      "article": "Art. 37",
+      "title": "DPO Required",
+      "description": "Public authorities and organizations whose core activities require systematic monitoring must appoint a Data Protection Officer.",
+      "always_escalate": true
+    },
+    "art44_transfers": {
+      "article": "Art. 44-49",
+      "title": "International Data Transfers",
+      "description": "Transfers outside EEA require adequacy decision, SCCs, BCRs, or other Art. 46 mechanism.",
+      "always_escalate": true
+    }
+  },
+  "penalty_tiers": {
+    "tier1": {
+      "title": "Tier 1 (Articles 8, 11, 25-39, 41(4), 42-43)",
+      "max_fine": "€10,000,000 or 2% of global turnover",
+      "description": "Less severe violations — data minimization, security, design, organizational measures"
+    },
+    "tier2": {
+      "title": "Tier 2 (All other GDPR articles)",
+      "max_fine": "€20,000,000 or 4% of global turnover",
+      "description": "All remaining GDPR violations — consent, rights, transfers, DPA requirements"
+    }
+  },
+  "scoring_algorithm": {
+    "description": "Evaluate in order: RED first, then YELLOW, then GREEN. First match wins.",
+    "steps": [
+      "1. Count findings by severity level",
+      "2. If CRITICAL >= 1 OR HIGH >= 3 → RED",
+      "3. If HIGH >= 1 OR MEDIUM >= 4 → YELLOW",
+      "4. Otherwise → GREEN"
+    ],
+    "numeric_formula": "100 - (CRITICAL × 15) - (HIGH × 5) - (MEDIUM × 1) - (LOW × 0.1), minimum 0"
+  },
+  "finding_categories": {
+    "pii_pattern": "Personal data directly in code — regex, variable names, hardcoded values",
+    "pii_locale": "Country-specific personal identifiers (PESEL, NIE, INSEE, etc.)",
+    "risky_practice": "Dangerous technical practices — logging, credentials, encryption",
+    "consent_violation": "Violations of consent principles — pre-checked, bundled, no withdrawal",
+    "special_category_art9": "Health, biometric, genetic, racial, political, religious, union, sexual orientation, philosophical beliefs, sex life data",
+    "art8_children": "Data processing involving minors",
+    "special_category_art10": "Criminal convictions and offence data",
+    "automated_decision_art22": "Automated decision-making and profiling",
+    "data_retention": "Storage limitation violations — unlimited retention, soft-delete without expiry",
+    "third_party_transfer": "Personal data sent to third-party services",
+    "tracking_without_consent": "Tracking cookies and pixels without prior consent (ePrivacy)",
+    "pii_in_notification": "Personal data in notification subjects or bodies"
+  }
+}
