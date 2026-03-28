@@ -10,15 +10,16 @@ Plugin marketplace for compliance, governance, and regulatory skills for [Claude
 
 ## Installation
 
-### Option 1: Via `/plugin` command (recommended)
+### Option 1: CLI install (recommended)
 
-In Claude Code, run:
+Add the marketplace and install the plugin:
 
+```bash
+claude plugin marketplace add the-momentum/skills
+claude plugin install opengdpr@the-momentum
 ```
-/plugin install the-momentum/skills
-```
 
-Then select the `opengdpr` plugin from the list.
+Restart Claude Code to activate the plugin.
 
 ### Option 2: Manual registration
 
@@ -37,18 +38,19 @@ Add this marketplace to your Claude Code settings (`~/.claude/settings.json`):
 }
 ```
 
-Then install the plugin:
+Then install the plugin via CLI:
 
-```
-/plugin install opengdpr@the-momentum
+```bash
+claude plugin install opengdpr@the-momentum
 ```
 
 ### Option 3: Direct skill copy
 
-If you prefer not to use the marketplace system, copy the skill directly:
+If you prefer not to use the marketplace system, clone the repo and copy the skill directly:
 
 ```bash
-cp -r opengdpr/skills/gdpr ~/.claude/skills/gdpr
+git clone https://github.com/the-momentum/skills.git the-momentum-skills
+cp -r the-momentum-skills/opengdpr/skills/gdpr ~/.claude/skills/gdpr
 ```
 
 ## Usage
