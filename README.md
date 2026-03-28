@@ -59,7 +59,7 @@ After installation, you can use the GDPR scanner in three ways:
 
 ### Slash command
 ```
-/gdpr-scan a
+/openGDPR
 ```
 
 ### Natural language
@@ -84,8 +84,6 @@ the-momentum/skills/
 ├── opengdpr/
 │   ├── .claude-plugin/
 │   │   └── plugin.json         # Plugin metadata (v0.5.0)
-│   ├── commands/
-│   │   └── gdpr-scan.md        # /gdpr-scan slash command
 │   ├── skills/
 │   │   └── gdpr/
 │   │       ├── SKILL.md        # Main skill definition
