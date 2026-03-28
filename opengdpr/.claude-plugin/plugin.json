@@ -1,0 +1,26 @@
+{
+  "name": "opengdpr",
+  "version": "0.5.0",
+  "description": "OpenGDPR — AI-assisted GDPR compliance scanner for source code",
+  "author": {
+    "name": "Creativa Legal",
+    "url": "https://www.creativa.legal"
+  },
+  "testedBy": {
+    "name": "The Momentum",
+    "url": "https://www.themomentum.ai"
+  },
+  "homepage": "https://opengdpr.io",
+  "repository": "https://github.com/the-momentum/skills",
+  "license": "GPL-3.0",
+  "keywords": [
+    "gdpr",
+    "compliance",
+    "data-protection",
+    "privacy",
+    "audit",
+    "scanner",
+    "eu-regulation-2016-679",
+    "eprivacy"
+  ]
+}

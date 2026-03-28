@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "the-momentum",
+  "description": "Compliance, governance & regulatory skills for Claude Code",
+  "owner": {
+    "name": "The Momentum",
+    "email": "contact@themomentum.ai"
+  },
+  "plugins": [
+    {
+      "name": "opengdpr",
+      "description": "OpenGDPR — AI-assisted GDPR compliance scanner with 288 checkpoints, regex code analysis, and risk scoring",
+      "author": {
+        "name": "Creativa Legal",
+        "email": "contact@creativa.legal"
+      },
+      "source": "./opengdpr",
+      "category": "compliance",
+      "homepage": "https://opengdpr.io"
+    }
+  ]
+}
